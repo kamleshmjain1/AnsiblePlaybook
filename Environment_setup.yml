@@ -1,0 +1,13 @@
+---
+# Creating Multiple Directory
+- name: Host diclaration
+  hosts: 127.0.0.1
+  connection: local
+ 
+  tasks:
+  - name: Creating multiple directories
+    file:
+      path: "/tmp/{{ item[0] }}/{{ item[1] }}"
+      state: directory
+    with_nested:
+      - ['PRE','BCP','POST']

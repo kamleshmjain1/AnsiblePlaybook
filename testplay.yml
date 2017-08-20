@@ -1,0 +1,12 @@
+---
+- name: Host details
+  hosts: all
+
+  tasks:
+    - name: get uptime details
+      shell: uptime
+      register: time
+
+    - debug:
+        msg: "{{ time }} | {{ inventory_hostname }}"
+        verbosity: 2

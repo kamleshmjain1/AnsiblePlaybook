@@ -1,0 +1,36 @@
+---
+# tasks file for backup-log
+- name: Create Backup Directory
+  file:
+    path: /tmp/backup
+    state: directory
+  delegate_to: 127.0.0.1
+
+
+- name: Finding log file
+  shell: find "{{ log_root }}" -name "{{ log_pattern }}" -maxdepth 1 -type f -print
+  register: found_log
+  changed_when: false
+
+- debug:
+    msg: "{{ found_log }}"
+
+
+- name: validate found logs
+  fail:
+    msg: "No log found"
+  when: "{{ found_log['stdout_lines']|length }} == 0"
+#  no_log: true
+
+- name: Copy file to backup folder
+  copy:
+    src: "{{ log_root }}/{{ log_pattern }}"
+    dest: /tmp/backup
+#  no_log: true 
+
+- name: Removing file form location
+  file: 
+    path: /tmp/testlog.txt
+    state: absent
+
+ 

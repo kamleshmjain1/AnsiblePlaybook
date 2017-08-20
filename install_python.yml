@@ -1,0 +1,12 @@
+---
+# install Python
+- name: Host Declaration
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - name: Install Python
+      yum: 
+        name: python
+        state: latest
+

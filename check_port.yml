@@ -1,0 +1,17 @@
+---
+#Check Port script
+- name: Host Declaration
+  hosts: 127.0.0.1
+  connection: local
+ 
+  tasks:
+  - name: checking application initialised correctly
+    shell: "echo {{ ansible_host }}" 
+# wait_for:
+#      host: "{{ ansible_host }}"
+#      port: "{{ port }}"
+#      timeout: "{{ app_start_timeout }}"
+
+  - debug:
+      msg: "{{ inventory_hostname }}| has fully initialised"
+  

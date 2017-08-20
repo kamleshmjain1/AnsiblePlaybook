@@ -1,0 +1,4 @@
+---
+# vars file for backup-log
+log_root: /tmp
+log_pattern: testlog.txt

@@ -1,0 +1,8 @@
+---
+# tasks file for install-apach
+- name: Running Apach Installation from rules
+  yum: 
+    name: httpd
+    state: latest
+  notify:
+    - restart-apach

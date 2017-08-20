@@ -1,0 +1,6 @@
+---
+- name: roles to create directory 
+  hosts: all
+  
+  roles:
+    - { role: create-directory }

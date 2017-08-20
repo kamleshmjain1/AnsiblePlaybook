@@ -1,0 +1,6 @@
+---
+# handlers file for install-apach
+- name: restart-apach
+  service: 
+    name: httpd
+    state: restarted

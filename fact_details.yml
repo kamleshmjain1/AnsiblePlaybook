@@ -1,0 +1,44 @@
+---
+#fact details script
+- name: Host declare
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - name: gather for for uptime
+      set_fact:
+        uptimesecond: "{{ ansible_uptime_seconds/86400|round(0,'floor')|int}} days"
+
+    - name: Gather various hostdetails
+      set_fact:
+        hostdetails:
+          hostname: "{{ ansible_hostname }}"
+          fqdn: "{{ ansible_fqdn }}"
+          os: "{{ ansible_system }}"
+          distribution: "{{ ansible_distribution }} ({{ ansible_distribution_version }})"
+          available_mem: "{{ ansible_memfree_mb }} MB"
+          python_version: "{{ ansible_version }}"
+
+
+    - name: Gather User Details
+      set_fact:
+        userdetails:
+          dir: "{{ ansible_user_dir }}"
+          gecos: "{{ ansible_user_gecos }}"
+          gid: "{{ ansible_user_gid }}"
+          uid: "{{ ansible_user_uid }}"
+          id: "{{ ansible_user_id }}"
+          shell: "{{ ansible_user_shell }}"
+          real: "{{ ansible_real_user_id }}"
+
+    - name: copy inforamtion about host of file
+      copy:
+        content: "{{ hostdetails| to_nice_json }}"
+        dest: "/tmp/hostdetails.txt"
+        mode: 0644
+
+    - name: copy user details to file
+      copy: 
+        content: "{{userdetails| to_nice_json }}"
+        dest: "/tmp/userdetails.txt"
+        mode: 0644

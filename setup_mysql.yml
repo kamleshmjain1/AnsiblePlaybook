@@ -1,0 +1,41 @@
+---
+
+#this playbook will will create mysql user and create table salary into emp database
+
+- name: Host Details
+  hosts: 127.0.0.1
+  connection: local
+  
+  tasks:
+
+    - name: Install "Pip"
+      yum: 
+        name: python-pip
+        state: latest 
+
+#    - name: Install "Libmysqlclient.dev"
+#      yum: 
+#        name: libmysqlclient-dev
+#        state: present
+
+    - name: Install the Python MySQLB module
+      pip: 
+        name: MySQL-python
+
+    - name: Create user root
+      mysql_user:
+        user: root
+        password: redhat
+        priv: '*.*:ALL'
+        state: present
+
+#    - name: Create User root
+#      mysql_user: user=root password=redhat priv=*.*:ALL state=present
+ 
+    - name: Create Database emp
+      mysql_db:
+        db: emp
+        state: present
+
+    - name: Create Table
+      command: mysql -u root -p redhat -e 'Create table sal(name varchar(30), email varchar(30));' emp

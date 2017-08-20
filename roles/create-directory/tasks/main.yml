@@ -1,0 +1,8 @@
+---
+# tasks file for create-directory
+- name: create Directory
+  file:
+    path: /tmp/kjain1
+    state: directory
+    owner: kjain1
+    mode: 0777

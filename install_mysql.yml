@@ -1,0 +1,23 @@
+---
+#This playbook will install MySQL 
+- name: Host Declaration
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: true
+
+  tasks:
+    - name: Install My-Sql
+      yum: 
+        name: mysql-server
+        state: latest
+
+
+    - name: Install PIP packages
+      yum:
+        name: python-pip
+        state: present
+
+    - name: Restart SQL services
+      service:
+        name: mysqld
+        state: restarted

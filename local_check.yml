@@ -1,0 +1,16 @@
+---
+- name: Local hostname check
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Check Hostname
+      shell: hostname -i
+      register: host
+      changed_when: false
+      no_log: true
+
+    - debug:
+       # msg: "{{ host }} | {{ inventory_hostname }}" 
+        msg: "{{ inventory_hostname }}" 
