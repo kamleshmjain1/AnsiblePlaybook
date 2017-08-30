@@ -16,8 +16,13 @@
 #      register: args 
 
     - name: Check User exist in table
-      command: mysql -u root -e "select * from sal where empName='{{ user }}';" emp
+      command: mysql -u root -e "select empName from sal where empName='{{ user }}';" emp
       register: value
 
     - debug:
-        msg: "{{ value['stdout_lines'] }}"
+        msg: "{{ value }}"
+
+    - name: validate input
+      fail:
+        msg: "User {{ user }} doesnot exist"
+      when: value['stdout_lines']|length == 0
