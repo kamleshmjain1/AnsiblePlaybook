@@ -13,7 +13,11 @@
   tasks:
     - name: Print user values
       shell: "echo {{ user }}"
-      register: user
+#      register: args 
+
+    - name: Check User exist in table
+      command: mysql -u root -e "select * from sal where empName='{{ user }}';" emp
+      register: value
 
     - debug:
-        msg: "{{ user['stdout_lines'] }}"
+        msg: "{{ value['stdout_lines'] }}"

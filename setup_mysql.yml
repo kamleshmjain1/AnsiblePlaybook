@@ -8,34 +8,37 @@
   
   tasks:
 
-    - name: Install "Pip"
-      yum: 
-        name: python-pip
-        state: latest 
+#    - name: Install "Pip"
+#      yum: 
+#        name: python-pip
+#        state: latest 
 
 #    - name: Install "Libmysqlclient.dev"
 #      yum: 
 #        name: libmysqlclient-dev
 #        state: present
 
-    - name: Install the Python MySQLB module
-      pip: 
-        name: MySQL-python
+#    - name: Install the Python MySQLB module
+#      pip: 
+#        name: MySQL-python
 
-    - name: Create user root
-      mysql_user:
-        user: root
-        password: redhat
-        priv: '*.*:ALL'
-        state: present
+#   - name: Create user root
+#      mysql_user:
+#        user: root
+#        password:
+#        priv: '*.*:ALL'
+#        state: present
 
 #    - name: Create User root
 #      mysql_user: user=root password=redhat priv=*.*:ALL state=present
  
-    - name: Create Database emp
-      mysql_db:
-        db: emp
-        state: present
+#    - name: Create Database emp
+#      mysql_db:
+#        db: emp
+#        state: present
 
-    - name: Create Table
-      command: mysql -u root -p redhat -e 'Create table sal(name varchar(30), email varchar(30));' emp
+#    - name: Create Table
+#      command: mysql -u root -p redhat -e 'Create table sal(name varchar(30), email varchar(30));' emp
+
+     - name: Select sal table details
+       command: mysql -u root -e 'select * from sal;' emp
